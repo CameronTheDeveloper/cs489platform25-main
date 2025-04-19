@@ -65,6 +65,12 @@ function love.update(dt)
         Sounds["game_over"]:play()
     end
 
+    if player.gems >= 3 and gameState ~= "over" then
+        gameState = "over"
+        stagemanager:currentStage():stopMusic()
+        Sounds["game_over"]:play()
+    end
+
     if gameState == "play" then
         stagemanager:currentStage():update(dt)
         player:update(dt, stagemanager:currentStage())
@@ -73,13 +79,15 @@ function love.update(dt)
         camera:update(dt)
         camera:follow(
             math.floor(player.x+48), math.floor(player.y))
-    end
-
-    
 
     elseif gameState == "start" then
 
     elseif gameState == "over" then
+
+    end
+
+
+    
 
     
 end

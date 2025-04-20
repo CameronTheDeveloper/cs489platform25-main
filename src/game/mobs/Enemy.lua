@@ -1,5 +1,6 @@
 local Class = require "libs.hump.class"
 local Hbox = require "src.game.Hbox"
+local DamageText = require "src.game.DamageText"
 
 local Enemy = Class{}
 function Enemy:init()
@@ -75,6 +76,7 @@ end
 
 function Enemy:hit(damage)
     self.hp = self.hp - damage
+    
 end
 
 function Enemy:getHbox(boxtype)

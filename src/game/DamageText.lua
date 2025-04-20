@@ -2,10 +2,10 @@ local Class = require "libs.hump.class"
 local Tween = require "libs.tween"
 
 
-local ChainText = Class{}
+local DamageText = Class{}
 
 
-function ChainText:init(x, y, chainLevel)
+function DamageText:init(x, y, chainLevel)
     self.x = x
     self.y = y
     self.text = chainLevel
@@ -34,7 +34,7 @@ function ChainText:init(x, y, chainLevel)
 end
 
 
-function ChainText:update(dt)
+function DamageText:update(dt)
     if not self.active then return end
    
     self.currentTime = self.currentTime + dt
@@ -63,7 +63,7 @@ function ChainText:update(dt)
 end
 
 
-function ChainText:draw()
+function DamageText:draw()
     if not self.active then return end
    
     love.graphics.setFont(self.font)
@@ -86,9 +86,9 @@ function ChainText:draw()
 end
 
 
-function ChainText:isActive()
+function DamageText:isActive()
     return self.active
 end
 
 
-return ChainText
+return DamageText

@@ -53,6 +53,10 @@ function HUD:drawHpBar()
     love.graphics.printf(self.player.hp.."/100",hudFont,90,4,70,"center") -- HP text
 end
 
+function HUD:drawEnemyDamage()
+    love.graphics.print("Enemy damaged: 10", hudFont, 150, 20)
+end
+
 function HUD:draw()
     love.graphics.draw(imgHead,5,1)
     love.graphics.print("x"..self.player.lives, hudFont, 22, 4)
@@ -62,6 +66,7 @@ function HUD:draw()
     self:drawHpBar()
 
     self.coin:draw()
+    self:drawEnemyDamage()
     love.graphics.print("x"..self.player.coins,hudFont, 186, 4)
 
     love.graphics.draw(imgTime,210,1)

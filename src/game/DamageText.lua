@@ -2,13 +2,13 @@ local Class = require "libs.hump.class"
 local Tween = require "libs.tween"
 
 
-local DamageText = Class{}
+-- local DamageText = Class{}
 
 
-function DamageText:init(x, y, chainLevel)
+function DamageText:init(x, y, damageText)
     self.x = x
     self.y = y
-    self.text = chainLevel
+    self.text = damageText
     self.active = true
 
 

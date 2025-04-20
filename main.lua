@@ -42,6 +42,9 @@ function love.keypressed(key)
         gameState = "start"
         player:reset()
         stagemanager:setStage(0)
+    elseif gameState == "stagecomplete" then 
+        gameState = "play"
+        stagemanager:setStage(2)
     elseif key == "return" and gameState=="start" then
         gameState = "play"
         stagemanager:setStage(1)
@@ -65,10 +68,15 @@ function love.update(dt)
         Sounds["game_over"]:play()
     end
 
-    if player.gems >= 3 and gameState ~= "over" then
-        gameState = "over"
-        stagemanager:currentStage():stopMusic()
-        Sounds["game_over"]:play()
+    if player.gems >= 1 and gameState ~= "over" then
+        -- gameState = "over"
+        -- stagemanager:currentStage():stopMusic()
+        -- Sounds["game_over"]:play()
+        -- player:nextStage(stagemanager:nextStage())
+        -- stagemanager:nextStage()
+        -- stagemanager:setStage(2)
+        gameState = "stagecomplete"
+        -- stagemanager:setStage(2)
     end
 
     if gameState == "play" then
@@ -79,11 +87,6 @@ function love.update(dt)
         camera:update(dt)
         camera:follow(
             math.floor(player.x+48), math.floor(player.y))
-
-    elseif gameState == "start" then
-
-    elseif gameState == "over" then
-
     end
 
 
@@ -103,6 +106,8 @@ function love.draw()
         drawStartState()
     elseif gameState == "over" then
         drawGameOverState()
+    elseif gameState == "stagecomplete" then
+        drawStageCompleteState()
     else --Error, should not happen
         love.graphics.setColor(1,1,0) -- Yellow
         love.graphics.printf("Error", 0,20,gameWidth,"center")
@@ -149,4 +154,16 @@ function drawGameOverState()
     love.graphics.printf("Total Score "..player.score,0,110,gameWidth,"center")
 
     love.graphics.printf("Press any key for Start Screen", 0,150,gameWidth,"center")
+end
+
+function drawStageCompleteState()
+   
+    love.graphics.setColor(0.3,0.3,0.3)
+    stagemanager:currentStage():drawBg()
+    camera:attach()  -- draw moving objects within attach() - detach()
+    stagemanager:currentStage():draw()
+    camera:detach() -- ends camera effect
+    love.graphics.setColor(0,1,0,1)
+    love.graphics.printf("Great Job! You finished this stage", titleFont,0,60,gameWidth,"center")
+    love.graphics.printf("Press any key to continue", 0,150,gameWidth,"center")
 end

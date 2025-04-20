@@ -2,34 +2,29 @@ local Class = require "libs.hump.class"
 local Tween = require "libs.tween"
 
 
--- local DamageText = Class{}
+local DamageText = Class{}
 
 
 function DamageText:init(x, y, damageText)
     self.x = x
     self.y = y
-    self.text = damageText
+    self.text = damageText  -- <<== uncommented
     self.active = true
-
 
     self.font = love.graphics.newFont(24)
     self.scale = 0.8
     self.color = {r=1, g=1, b=0}  -- yellow
-    self.alpha = 0  -- transparent
-    -- text centered
+    self.alpha = 0
     self.width = self.font:getWidth(self.text)
-   
 
-
-    self.duration = 3.0  
-    self.fadeInTime = 0.5  
-    self.holdTime = 2.0  
-    self.fadeOutTime = 0.5  
+    self.duration = 3.0
+    self.fadeInTime = 0.5
+    self.holdTime = 2.0
+    self.fadeOutTime = 0.5
     self.currentTime = 0
-   
-    -- animation tween
+
     self.animationTween = Tween.new(self.duration, self, {
-        y = self.y - 80  
+        y = self.y - 80
     }, 'outQuad')
 end
 

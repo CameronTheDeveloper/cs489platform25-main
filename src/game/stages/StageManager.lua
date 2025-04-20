@@ -5,7 +5,7 @@ local Stage = require "src.game.stages.Stage"
 local StageManager = Class{}
 function StageManager:init()
     self.createStage = {} -- stage creation function list
-    self.index = 2 -- current stage index
+    self.index = 0 -- current stage index
     self.current = nil -- current instance of the stage
     self.player = nil -- reference to the player
     self.camera = nil -- reference to camera
@@ -24,11 +24,11 @@ function StageManager:setCamera(camera)
 end
 
 function StageManager:nextStage()
-    self:setStage(self.index+2)
+    self:setStage(self.index+1)
 end
 
 function StageManager:prevStage()
-    self:setStage(self.index-2)
+    self:setStage(self.index-1)
 end
 
 function StageManager:setStage(index)

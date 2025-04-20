@@ -1,6 +1,7 @@
 local Class = require "libs.hump.class"
 local Hbox = require "src.game.Hbox"
-local DamageText = require "src.game.DamageText"
+
+local DamageTextManager = require "src.game.DamageTextManager"
 
 local Enemy = Class{}
 function Enemy:init()
@@ -75,8 +76,10 @@ function Enemy:changeDirection()
 end
 
 function Enemy:hit(damage)
+    print("Enemy took damage:", damage) -- DEBUG
     self.hp = self.hp - damage
-    
+    local w, h = self:getDimensions()
+    DamageTextManager.spawn(self.x + w / 2, self.y - 10, tostring(damage))
 end
 
 function Enemy:getHbox(boxtype)

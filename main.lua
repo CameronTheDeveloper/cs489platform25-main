@@ -5,6 +5,8 @@ local Player = require "src.game.Player"
 local Camera = require "libs.sxcamera"
 local HUD = require "src.game.HUDimproved"
 
+local DamageTextManager = require "src.game.DamageTextManager"
+
 -- Load is executed only once; used to setup initial resource for your game
 function love.load()
     love.window.setTitle("CS489 Platformer")
@@ -44,7 +46,7 @@ function love.keypressed(key)
         stagemanager:setStage(0)
     elseif gameState == "stagecomplete" then 
         gameState = "play"
-        stagemanager:setStage(2)
+        stagemanager:nextStage()
     elseif key == "return" and gameState=="start" then
         gameState = "play"
         stagemanager:setStage(1)
@@ -67,16 +69,10 @@ function love.update(dt)
         stagemanager:currentStage():stopMusic()
         Sounds["game_over"]:play()
     end
+    DamageTextManager.update(dt)
 
-    if player.gems >= 1 and gameState ~= "over" then
-        -- gameState = "over"
-        -- stagemanager:currentStage():stopMusic()
-        -- Sounds["game_over"]:play()
-        -- player:nextStage(stagemanager:nextStage())
-        -- stagemanager:nextStage()
-        -- stagemanager:setStage(2)
+    if player.gems >= 3 and gameState ~= "over" then
         gameState = "stagecomplete"
-        -- stagemanager:setStage(2)
     end
 
     if gameState == "play" then
@@ -99,7 +95,6 @@ end
 function love.draw()
     Push:start() 
     -- always draw between Push:start() and Push:finish()
-
     if gameState == "play" then
         drawPlayState()
     elseif gameState == "start" then
@@ -124,6 +119,7 @@ function drawPlayState()
 
     stagemanager:currentStage():draw()
     player:draw()
+    DamageTextManager.draw()
     
     camera:detach()
 

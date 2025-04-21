@@ -28,9 +28,7 @@ function Stage:update(dt)
 
     for k=#self.mobs, 1, -1 do 
         self.mobs[k]:update(dt, self)
-        love.graphics.print("Damage", hudFont, self.mobs[k].x, self.mobs[k].y + 10)
-        love.graphics.printf("Dammage example", hudFont, 90,4,70,"center")
-        love.graphics.printf("Damage example 2",hudFont,70,4,70,"center") -- HP text
+        
 
         if self.mobs[k].died then
             table.remove(self.mobs, k)
@@ -65,6 +63,7 @@ function Stage:draw()
 
     for k=1, #self.mobs do 
         self.mobs[k]:draw()
+        love.graphics.print("Health: "..self.mobs[k].hp, hudFont, self.mobs[k].x, self.mobs[k].y - 20)
     end
 end
 

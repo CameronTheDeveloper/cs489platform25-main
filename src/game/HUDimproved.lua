@@ -66,7 +66,6 @@ function HUD:draw()
     self:drawHpBar()
 
     self.coin:draw()
-    self:drawEnemyDamage()
     love.graphics.print("x"..self.player.coins,hudFont, 186, 4)
 
     love.graphics.draw(imgTime,210,1)

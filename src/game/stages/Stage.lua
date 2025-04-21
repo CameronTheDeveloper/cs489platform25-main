@@ -1,7 +1,7 @@
 local Class = require "libs.hump.class"
 local Matrix = require "libs.matrix"
 local objutil = require "src.game.objects.objutil"
--- local hudFont = love.graphics.newFont("fonts/Abaddon Bold.ttf",16)
+local hudFont = love.graphics.newFont("fonts/Abaddon Bold.ttf",16)
 -- local hudFont = nil
 
 local Stage = Class{}
@@ -28,9 +28,9 @@ function Stage:update(dt)
 
     for k=#self.mobs, 1, -1 do 
         self.mobs[k]:update(dt, self)
-        -- love.graphics.print("Damage", hudFont, self.mobs[k].x, self.mobs[k].y + 10)
-        -- love.graphics.printf("Dammage hahahaha", hudFont, 90,4,70,"center")
-        -- love.graphics.printf("Damage LOLOL",hudFont,70,4,70,"center") -- HP text
+        love.graphics.print("Damage", hudFont, self.mobs[k].x, self.mobs[k].y + 10)
+        love.graphics.printf("Dammage example", hudFont, 90,4,70,"center")
+        love.graphics.printf("Damage example 2",hudFont,70,4,70,"center") -- HP text
 
         if self.mobs[k].died then
             table.remove(self.mobs, k)

@@ -81,6 +81,8 @@ function Boar:update(dt, stage)
     end -- end if walking state
     Timer.update(dt) -- attention, Timer.update uses dot, and not :
     self.animations[self.state]:update(dt)
+
+
 end -- end function
     
 function Boar:hit(damage, direction)
@@ -97,6 +99,8 @@ function Boar:hit(damage, direction)
 
     Timer.after(1, function() self:endHit(direction) end)
     Timer.after(0.9, function() self.invincible = false end)
+    love.graphics.print("Damaged", hudFont, self.x, self.y + 10)
+
 
 end
 

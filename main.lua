@@ -93,6 +93,7 @@ end
 
 -- Draws the game after the update
 function love.draw()
+    -- love.graphics.printf("HEllo World", 30, 15, "")
     Push:start() 
     -- always draw between Push:start() and Push:finish()
     if gameState == "play" then
@@ -103,6 +104,8 @@ function love.draw()
         drawGameOverState()
     elseif gameState == "stagecomplete" then
         drawStageCompleteState()
+    elseif gameState == "gamecomplete" then
+        drawEndStage()
     else --Error, should not happen
         love.graphics.setColor(1,1,0) -- Yellow
         love.graphics.printf("Error", 0,20,gameWidth,"center")
@@ -162,4 +165,14 @@ function drawStageCompleteState()
     love.graphics.setColor(0,1,0,1)
     love.graphics.printf("Great Job! You finished this stage", titleFont,0,60,gameWidth,"center")
     love.graphics.printf("Press any key to continue", 0,150,gameWidth,"center")
+end
+
+function drawEndStage()
+    love.graphics.setColor(0.3,0.3,0.3)
+    stagemanager:currentStage():drawBg()
+    camera:attach()  -- draw moving objects within attach() - detach()
+    stagemanager:currentStage():draw()
+    camera:detach() -- ends camera effect
+    love.graphics.setColor(0,1,0,1)
+    love.graphics.printf("You Completed the game! Press any key to restart", titleFont,0,60,gameWidth,"center")
 end

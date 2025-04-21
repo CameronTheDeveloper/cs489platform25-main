@@ -35,10 +35,13 @@ end
 function Enemy:setCoord(x,y)
     self.x = x
     self.y = y
+
 end
 
 function Enemy:update(dt)
     self.animations[self.state]:update(dt)
+    -- love.graphics.printf("Damaged", hudFont, self.x, self.y + 10)
+
 end
 
 function Enemy:draw()

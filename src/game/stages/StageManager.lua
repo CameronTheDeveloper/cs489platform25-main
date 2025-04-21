@@ -24,7 +24,11 @@ function StageManager:setCamera(camera)
 end
 
 function StageManager:nextStage()
-    self:setStage(self.index+1)
+    if self.index > 2 then
+        self:setStage(1)
+    else
+        self:setStage(self.index+1)
+    end
 end
 
 function StageManager:prevStage()
